@@ -18,7 +18,7 @@ const TOKEN_PATH = `${TOKEN_DIR}/deep-thoughts.json`;
 * Print the names and majors of students in a sample spreadsheet:
 * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
 */
-function getQuestions(auth, res) {
+function getQuestions(auth, res, numQs) {
   const sheets = google.sheets('v4');
   sheets.spreadsheets.values.get({
     auth,
@@ -31,9 +31,23 @@ function getQuestions(auth, res) {
     }
     const rows = response.values;
     if (rows.length === 0) {
-      console.log('No data found.');
+      res.send('No data found.');
     } else {
-      res.json(rows.map(row => row[0]));
+      const allQuestions = rows.map(row => row[0]);
+
+      const questionSample = [];
+
+      function getRandomQuestion() {
+        const randomIndex = Math.floor(Math.random() * allQuestions.length);
+        const randomQ = allQuestions[randomIndex];
+        allQuestions.splice(randomIndex, 1);
+        return randomQ;
+      }
+
+      for (let i = 0; i < numQs; i += 1) {
+        questionSample.push(getRandomQuestion());
+      }
+      res.json(questionSample);
     }
   });
 }
@@ -77,7 +91,7 @@ function getNewToken(oauth2Client, callback) {
 * @param {Object} credentials The authorization client credentials.
 * @param {function} callback The callback to call with the authorized client.
 */
-function authorize(credentials, callback, res) {
+function authorize(credentials, callback, res, numQs) {
   const clientSecret = credentials.installed.client_secret;
   const clientId = credentials.installed.client_id;
   const redirectUrl = credentials.installed.redirect_uris[0];
@@ -90,7 +104,7 @@ function authorize(credentials, callback, res) {
       getNewToken(oauth2Client, callback);
     } else {
       oauth2Client.credentials = JSON.parse(token);
-      callback(oauth2Client, res);
+      callback(oauth2Client, res, numQs);
     }
   });
 }
@@ -123,7 +137,7 @@ app.get('/questions', (req, res) => {
       return;
     }
 
-    authorize(JSON.parse(content), getQuestions, res);
+    authorize(JSON.parse(content), getQuestions, res, req.query.num);
   });
 });
 
