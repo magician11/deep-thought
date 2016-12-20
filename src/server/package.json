@@ -4,6 +4,7 @@
   "description": "A webapp to deepen connections between people.",
   "main": "start.js",
   "dependencies": {
+    "express": "^4.14.0",
     "google-auth-library": "^0.9.10",
     "googleapis": "^15.0.0"
   },
