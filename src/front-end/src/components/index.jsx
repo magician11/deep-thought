@@ -15,19 +15,20 @@ class DeepQuestionsApp extends Component {
   componentDidMount() {
     fetch('http://golightlyplus.com:6900/questions?num=9')
     .then(response => response.json())
-    .then((json) => {
-      console.log('parsed json', json);
+    .then((questions) => {
+      console.log(questions);
+      this.setState({ questions });
     }).catch((ex) => {
       console.log('parsing failed', ex);
     });
   }
 
   render() {
-    const content = <h1>Your React app starting point</h1>;
+    const question = this.state.questions[0];
 
     return (
-      <div className={styling['your-component']}>
-        {content}
+      <div className={styling['deep-questions-app']}>
+        {question}
       </div>
     );
   }

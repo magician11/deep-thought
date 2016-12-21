@@ -1,8 +1,15 @@
 :local {
-  $black: #000;
-  $white: #fff;
-  
-  .your-component {
+  $light-blue: #00BFFF;
+  $white: #FFF;
+
+  .deep-questions-app {
     font-family: Arial;
+    background-color: $light-blue;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    font-size: 3rem;
   }
 }
