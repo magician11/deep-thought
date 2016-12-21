@@ -9,6 +9,7 @@ const readline = require('readline');
 const google = require('googleapis');
 const GoogleAuth = require('google-auth-library');
 const express = require('express');
+const cors = require('cors'); // Cross-Origin Resource Sharing
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 const TOKEN_DIR = `${(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE)}/.credentials/`;
@@ -123,6 +124,7 @@ function storeToken(token) {
 }
 
 const app = express();
+app.use(cors());
 
 app.get('/questions', (req, res) => {
   // Load client secrets from a local file.
