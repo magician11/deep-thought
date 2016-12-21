@@ -14,10 +14,6 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 const TOKEN_DIR = `${(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE)}/.credentials/`;
 const TOKEN_PATH = `${TOKEN_DIR}/deep-thoughts.json`;
 
-/**
-* Print the names and majors of students in a sample spreadsheet:
-* https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-*/
 function getQuestions(auth, res, numQs) {
   const sheets = google.sheets('v4');
   sheets.spreadsheets.values.get({
@@ -128,7 +124,6 @@ function storeToken(token) {
 
 const app = express();
 
-// for routes that goto /maya-mall
 app.get('/questions', (req, res) => {
   // Load client secrets from a local file.
   fs.readFile('client_secret.json', (err, content) => {
@@ -136,8 +131,11 @@ app.get('/questions', (req, res) => {
       console.log(`Error loading client secret file: ${err}`);
       return;
     }
-
-    authorize(JSON.parse(content), getQuestions, res, req.query.num);
+    if (!req.query.num) {
+      res.send('Number of questions not specified. e.g. /questions?num=11');
+    } else {
+      authorize(JSON.parse(content), getQuestions, res, req.query.num);
+    }
   });
 });
 
