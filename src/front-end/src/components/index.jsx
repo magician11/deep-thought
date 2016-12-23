@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
+import { Button } from 'react-bootstrap';
+import ReactSwipe from 'react-swipe';
 
+import 'bootstrap/dist/css/bootstrap.css';
 import styling from '../styling/main.scss';
 
 class DeepQuestionsApp extends Component {
@@ -9,17 +12,19 @@ class DeepQuestionsApp extends Component {
 
     this.state = {
       questions: [],
-      currentQuestion: '',
+      appReady: false,
+      started: false,
     };
 
     this.changeQuestion = this.changeQuestion.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
 
   componentDidMount() {
-    fetch('http://golightlyplus.com:6900/questions?num=3')
+    fetch('http://golightlyplus.com:6900/questions?num=8')
     .then(response => response.json())
     .then((questions) => {
-      this.setState({ questions, currentQuestion: questions[0] });
+      this.setState({ questions, appReady: true });
     }).catch((ex) => {
       console.log('parsing failed', ex);
     });
@@ -36,16 +41,34 @@ class DeepQuestionsApp extends Component {
     });
   }
 
+  startGame() {
+    this.setState({ started: true });
+  }
+
   render() {
     let content;
-    if (this.state.questions.length === 0) {
-      content = 'Game over';
+
+    if (!this.state.appReady) {
+      content = <h1>Loading...</h1>;
+    } else if (!this.state.started) {
+      content = (
+        <div className={styling['home-screen']}>
+          <h1>Deep Thought</h1>
+          <p>8 Questions To Deepen Connection.</p>
+          <Button block bsStyle="primary" bsSize="large" onClick={this.startGame}>Begin</Button>
+        </div>
+      );
     } else {
-      content = this.state.currentQuestion;
+      content = (
+        <ReactSwipe swipeOptions={{ continuous: false }}>
+          { this.state.questions.map((question, i) => <div key={i} className={styling.question}>{question}</div>) }
+        </ReactSwipe>
+      );
     }
+
     return (
-      <div className={styling['deep-questions-app']} onClick={this.changeQuestion}>
-        {content}
+      <div className={styling['deep-questions-app']}>
+        { content }
       </div>
     );
   }
