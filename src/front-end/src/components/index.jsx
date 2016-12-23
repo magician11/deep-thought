@@ -48,13 +48,15 @@ class DeepQuestionsApp extends Component {
   render() {
     let content;
 
-    if (!this.state.appReady) {
-      content = <h1>Loading...</h1>;
+    if (!('ontouchstart' in window)) {
+      content = <h2>Sorry, this app currently only works with touch screens.</h2>;
+    } else if (!this.state.appReady) {
+      content = <div className={styling.spinner} />;
     } else if (!this.state.started) {
       content = (
         <div className={styling['home-screen']}>
           <h1>Deep Thought</h1>
-          <p>8 Questions To Deepen Connection.</p>
+          <p>8 Questions To Deepen Connection</p>
           <Button block bsStyle="primary" bsSize="large" onClick={this.startGame}>Begin</Button>
         </div>
       );

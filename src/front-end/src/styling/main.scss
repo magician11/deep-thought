@@ -1,6 +1,6 @@
 :local {
   $light-blue: #00BFFF;
-  $white: #FFF;
+  $white: #fff;
   $dark-blue: #4682B4;
 
   .deep-questions-app {
@@ -19,12 +19,32 @@
       margin-top: 3rem;
     }
 
-    div::selection {
+    ::selection {
       background: $dark-blue;
     }
 
     .question {
       padding: 100vh 0;
+    }
+
+    // from http://tobiasahlin.com/spinkit/
+    .spinner {
+      width: 40px;
+      height: 40px;
+      background-color: $white;
+
+      margin: 100px auto;
+      animation: sk-rotateplane 1.2s infinite ease-in-out;
+    }
+
+    @keyframes :local(sk-rotateplane) {
+      0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+      } 50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+      } 100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      }
     }
   }
 }
