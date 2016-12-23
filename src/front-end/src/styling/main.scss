@@ -1,6 +1,7 @@
 :local {
   $light-blue: #00BFFF;
   $white: #FFF;
+  $dark-blue: #4682B4;
 
   .deep-questions-app {
     font-family: Arial;
@@ -18,8 +19,12 @@
       margin-top: 3rem;
     }
 
+    div::selection {
+      background: $dark-blue;
+    }
+
     .question {
-      padding: 11rem 0;
+      padding: 100vh 0;
     }
   }
 }
