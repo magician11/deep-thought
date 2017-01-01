@@ -6,6 +6,8 @@ import ReactSwipe from 'react-swipe';
 import 'bootstrap/dist/css/bootstrap.css';
 import styling from '../styling/main.scss';
 
+/* eslint-disable max-len, no-console */
+
 class DeepQuestionsApp extends Component {
   constructor() {
     super();
@@ -49,7 +51,12 @@ class DeepQuestionsApp extends Component {
     let content;
 
     if (!('ontouchstart' in window)) {
-      content = <h2>Sorry, this app currently only works with touch screens.</h2>;
+      content = (
+        <div className={styling['home-screen']}>
+          <h1>Deep Thought</h1>
+          <p>Sorry, this app currently only works with touch screens.</p>
+        </div>
+      );
     } else if (!this.state.appReady) {
       content = <div className={styling.spinner} />;
     } else if (!this.state.started) {
@@ -64,6 +71,10 @@ class DeepQuestionsApp extends Component {
       content = (
         <ReactSwipe swipeOptions={{ continuous: false }}>
           { this.state.questions.map((question, i) => <div key={i} className={styling.question}>{question}</div>) }
+          <div key="feedback" className={styling.question}>
+            <p>Thanks for trying Deep Questions! The app is currently a work in progress, and we'd love to hear to your feedback.</p>
+            <a className="btn btn-default" href="https://docs.google.com/forms/d/e/1FAIpQLSdf6K_OTX5YUvlaz5h40d4Ke2JRYrgaBWu9ZjYN-cCpqixXBA/viewform?hl=english" role="button">Leave Feedback</a>
+          </div>
         </ReactSwipe>
       );
     }
