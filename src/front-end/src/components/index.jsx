@@ -72,8 +72,10 @@ class DeepQuestionsApp extends Component {
         <ReactSwipe swipeOptions={{ continuous: false }}>
           { this.state.questions.map((question, i) => <div key={i} className={styling.question}>{question}</div>) }
           <div key="feedback" className={styling.question}>
-            <p>Thanks for trying Deep Questions! The app is currently a work in progress, and we'd love to hear to your feedback.</p>
-            <a className="btn btn-default" href="https://docs.google.com/forms/d/e/1FAIpQLSdf6K_OTX5YUvlaz5h40d4Ke2JRYrgaBWu9ZjYN-cCpqixXBA/viewform?hl=english" role="button">Leave Feedback</a>
+            <p>Thanks for trying Deep Questions!</p>
+            <p>The app is currently a work in progress, and we'd love it if you could take 1 minute to answer 2 questions.</p>
+            <br />
+            <a className="btn btn-default btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSdf6K_OTX5YUvlaz5h40d4Ke2JRYrgaBWu9ZjYN-cCpqixXBA/viewform?hl=english" role="button">Leave Feedback</a>
           </div>
         </ReactSwipe>
       );
