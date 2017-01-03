@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpackConfig = {
   entry: './src/index.jsx',
@@ -24,6 +25,9 @@ const webpackConfig = {
       filename: 'index.html',
       template: 'src/index.html',
     }),
+    new CopyWebpackPlugin([
+      { from: 'icons' },
+    ]),
   ],
 };
 

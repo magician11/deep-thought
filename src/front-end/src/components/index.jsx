@@ -23,7 +23,7 @@ class DeepQuestionsApp extends Component {
   }
 
   componentDidMount() {
-    fetch('http://golightlyplus.com:6900/questions?num=8')
+    fetch('https://golightlyplus.com:6900/questions?num=8')
     .then(response => response.json())
     .then((questions) => {
       this.setState({ questions, appReady: true });
