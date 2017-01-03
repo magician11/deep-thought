@@ -7,6 +7,7 @@ Taken from https://developers.google.com/sheets/api/quickstart/nodejs
 const fs = require('fs');
 const readline = require('readline');
 const google = require('googleapis');
+const https = require('https');
 const GoogleAuth = require('google-auth-library');
 const express = require('express');
 const cors = require('cors'); // Cross-Origin Resource Sharing
@@ -143,7 +144,14 @@ app.get('/questions', (req, res) => {
 
 app.set('port', 6900);
 
-app.listen(app.get('port'), () => {
+const sslOptions = {
+  key: fs.readFileSync('/etc/letsencrypt/live/golightlyplus.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/golightlyplus.com/fullchain.pem'),
+  ca: fs.readFileSync('/etc/letsencrypt/live/golightlyplus.com/chain.pem'),
+};
+
+// startup the https server
+https.createServer(sslOptions, app).listen(app.get('port'), () => {
   // eslint-disable-next-line no-console
   console.log(`Deep questions webapp listening on port ${app.get('port')}.`);
 });
