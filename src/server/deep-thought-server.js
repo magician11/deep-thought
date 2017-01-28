@@ -16,12 +16,19 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 const TOKEN_DIR = `${(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE)}/.credentials/`;
 const TOKEN_PATH = `${TOKEN_DIR}/deep-thoughts.json`;
 
+const getRandomQuestion = (allQuestions) => {
+  const randomIndex = Math.floor(Math.random() * allQuestions.length);
+  const randomQ = allQuestions[randomIndex];
+  allQuestions.splice(randomIndex, 1);
+  return randomQ;
+};
+
 function getQuestions(auth, res, numQs) {
   const sheets = google.sheets('v4');
   sheets.spreadsheets.values.get({
     auth,
     spreadsheetId: '1lxo1qiy9aTm49kk_fyZ543IbxhSfYSgboXKBX1yz160',
-    range: 'A2:999',
+    range: 'A1:999',
   }, (err, response) => {
     if (err) {
       console.log(`The API returned an error: ${err}`);
@@ -35,15 +42,8 @@ function getQuestions(auth, res, numQs) {
 
       const questionSample = [];
 
-      function getRandomQuestion() {
-        const randomIndex = Math.floor(Math.random() * allQuestions.length);
-        const randomQ = allQuestions[randomIndex];
-        allQuestions.splice(randomIndex, 1);
-        return randomQ;
-      }
-
       for (let i = 0; i < numQs; i += 1) {
-        questionSample.push(getRandomQuestion());
+        questionSample.push(getRandomQuestion(allQuestions));
       }
       res.json(questionSample);
     }
@@ -153,5 +153,5 @@ const sslOptions = {
 // startup the https server
 https.createServer(sslOptions, app).listen(app.get('port'), () => {
   // eslint-disable-next-line no-console
-  console.log(`Deep questions webapp listening on port ${app.get('port')}.`);
+  console.log(`Deep Thought webapp listening on port ${app.get('port')}.`);
 });
