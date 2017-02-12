@@ -1,0 +1,66 @@
+body {
+  font-family: 'Open Sans';
+  background-color: #000;
+  color: white;
+  font-size: 2.2rem;
+}
+
+.home-screen, .loader-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.home-screen .logo {
+  fill: #fff;
+  width: 11rem;
+}
+
+.home-screen > div > * {
+  margin-bottom: 3rem;
+}
+
+::selection {
+  background: #4682B4;
+}
+
+/* The questions */
+
+.questions, .slick-slide {
+  height: 100vh;
+}
+
+.questions .question {
+  background: linear-gradient(#4682B4, #00BFFF);
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.45rem;
+}
+
+/* Spinner loader */
+/* from http://tobiasahlin.com/spinkit/ */
+.spinner {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+
+  margin: 100px auto;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@keyframes sk-rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}

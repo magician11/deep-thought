@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 import { Grid, Button } from 'react-bootstrap';
-const Slider = require('react-slick');
+/*
+http://kenwheeler.github.io/slick/
+and
+https://github.com/akiran/react-slick
+*/
+import Slider from 'react-slick';
 
 import YinYang from '../svgs/yin-yang';
 import 'bootstrap/dist/css/bootstrap.css';
