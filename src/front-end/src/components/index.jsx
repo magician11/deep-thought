@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import { Button } from 'react-bootstrap';
-import ReactSwipe from 'react-swipe';
+import { Grid, Button } from 'react-bootstrap';
+const Slider = require('react-slick');
 
+import YinYang from '../svgs/yin-yang';
 import 'bootstrap/dist/css/bootstrap.css';
-import styling from '../styling/main.scss';
+import '../styling/main.css';
 
 /* eslint-disable max-len, no-console */
 
-class DeepQuestionsApp extends Component {
+class DeepThoughtApp extends Component {
   constructor() {
     super();
 
@@ -18,28 +19,18 @@ class DeepQuestionsApp extends Component {
       started: false,
     };
 
-    this.changeQuestion = this.changeQuestion.bind(this);
     this.startGame = this.startGame.bind(this);
   }
 
   componentDidMount() {
-    fetch('https://golightlyplus.com:6900/questions?num=8')
+    const numberOfQuestions = 8;
+
+    fetch(`https://golightlyplus.com:6900/questions?num=${numberOfQuestions}`)
     .then(response => response.json())
     .then((questions) => {
       this.setState({ questions, appReady: true });
     }).catch((ex) => {
       console.log('parsing failed', ex);
-    });
-  }
-
-  changeQuestion() {
-    const allQuestions = this.state.questions;
-    const randomIndex = Math.floor(Math.random() * allQuestions.length);
-    const randomQ = allQuestions[randomIndex];
-    allQuestions.splice(randomIndex, 1);
-    this.setState({
-      questions: allQuestions,
-      currentQuestion: randomQ,
     });
   }
 
@@ -50,43 +41,46 @@ class DeepQuestionsApp extends Component {
   render() {
     let content;
 
-    if (!('ontouchstart' in window)) {
-      content = (
-        <div className={styling['home-screen']}>
-          <h1>Deep Thought</h1>
-          <p>Sorry, this app currently only works with touch screens.</p>
-        </div>
-      );
-    } else if (!this.state.appReady) {
-      content = <div className={styling.spinner} />;
+    if (!this.state.appReady) {
+      content = <div className="loader-container"><div className='spinner' /></div>;
     } else if (!this.state.started) {
       content = (
-        <div className={styling['home-screen']}>
-          <h1>Deep Thought</h1>
-          <p>8 Questions To Deepen Connection</p>
-          <Button block bsStyle="primary" bsSize="large" onClick={this.startGame}>Begin</Button>
+        <div className='home-screen'>
+          <div>
+            <YinYang className="logo" />
+            <h1>Deep Thought</h1>
+            <p>Questions To Deepen Connection</p>
+            <Button block bsStyle="primary" bsSize="large" onClick={this.startGame}>Begin</Button>
+          </div>
         </div>
       );
     } else {
+      const settings = {
+        className: 'questions',
+        adaptiveHeight: true,
+        arrows: false,
+        infinite: false,
+      };
       content = (
-        <ReactSwipe swipeOptions={{ continuous: false }}>
-          { this.state.questions.map((question, i) => <div key={i} className={styling.question}>{question}</div>) }
-          <div key="feedback" className={styling.question}>
-            <p>Thanks for trying Deep Questions!</p>
-            <p>The app is currently a work in progress, and we'd love it if you could take 1 minute to answer 2 questions.</p>
-            <br />
-            <a className="btn btn-default btn-lg" href="https://docs.google.com/forms/d/e/1FAIpQLSdf6K_OTX5YUvlaz5h40d4Ke2JRYrgaBWu9ZjYN-cCpqixXBA/viewform?hl=english" role="button">Leave Feedback</a>
-          </div>
-        </ReactSwipe>
+        <div className="slider-container">
+          <Slider {...settings}>
+            { this.state.questions.map((question, i) => <div key={i} className='question'><Grid>{question}</Grid></div>) }
+            <div key='final-slide' className='question'><Grid>
+              <h2>All done!</h2>
+              <p>To play again, just refresh the page.</p>
+              <h4>To give any feedback or to get in touch, <a href="https://www.golightlyplus.com/contact">contact Andrew</a>.</h4>
+            </Grid></div>
+          </Slider>
+        </div>
       );
     }
 
     return (
-      <div className={styling['deep-questions-app']}>
+      <Grid className='deep-questions-app'>
         { content }
-      </div>
+      </Grid>
     );
   }
 }
 
-export default DeepQuestionsApp;
+export default DeepThoughtApp;
