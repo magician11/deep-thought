@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import { Grid, Button } from 'react-bootstrap';
+import { Grid, Button, Alert } from 'react-bootstrap';
 import ReactSwipe from 'react-swipe';
 
 import YinYang from '../svgs/yin-yang';
@@ -17,6 +17,7 @@ class DeepThoughtApp extends Component {
       questions: [],
       appReady: false,
       started: false,
+      error: '',
     };
 
     this.startGame = this.startGame.bind(this);
@@ -30,7 +31,7 @@ class DeepThoughtApp extends Component {
     .then((questions) => {
       this.setState({ questions, appReady: true });
     }).catch((ex) => {
-      console.log('parsing failed', ex);
+      this.setState({error: ex.message});
     });
   }
 
@@ -41,7 +42,16 @@ class DeepThoughtApp extends Component {
   render() {
     let content;
 
-    if (!this.state.appReady) {
+    if (this.state.error !== '') {
+      content = (
+        <div className="error-message">
+          <Alert bsStyle="danger">
+            <p><i className="fa fa-exclamation-circle" aria-hidden="true"></i> Error: {this.state.error}</p>
+            <p>Please <a href="https://www.golightlyplus.com">contact Andrew</a></p>
+          </Alert>
+        </div>
+      );
+    } else if (!this.state.appReady) {
       content = <div className="loader-container"><div className='spinner' /></div>;
     } else if (!this.state.started) {
       content = (
