@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 import { Grid, Button } from 'react-bootstrap';
-/*
-http://kenwheeler.github.io/slick/
-and
-https://github.com/akiran/react-slick
-*/
-import Slider from 'react-slick';
+import ReactSwipe from 'react-swipe';
 
 import YinYang from '../svgs/yin-yang';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -61,27 +56,23 @@ class DeepThoughtApp extends Component {
       );
     } else {
       const settings = {
-        className: 'questions',
-        adaptiveHeight: true,
-        arrows: false,
-        infinite: false,
+        continuous: false,
       };
+
       content = (
-        <div className="slider-container">
-          <Slider {...settings}>
-            { this.state.questions.map((question, i) => <div key={i} className='question'><Grid>{question}</Grid></div>) }
-            <div key='final-slide' className='question'><Grid>
-              <h2>All done!</h2>
-              <p>To play again, just refresh the page.</p>
-              <h4>To give any feedback or to get in touch, <a href="https://www.golightlyplus.com/contact">contact Andrew</a>.</h4>
-            </Grid></div>
-          </Slider>
-        </div>
+        <ReactSwipe className="questions" swipeOptions={{...settings}}>
+          { this.state.questions.map((question, i) => <div key={i} className='question'><Grid>{question}</Grid></div>) }
+          <div key='final-slide' className='question'><Grid>
+            <h2>All done!</h2>
+            <p>To play again, just refresh the page.</p>
+            <h4>To give any feedback or to get in touch, <a href="https://www.golightlyplus.com/contact">contact us</a>.</h4>
+          </Grid></div>
+        </ReactSwipe>
       );
     }
 
     return (
-      <Grid className='deep-questions-app'>
+      <Grid>
         { content }
       </Grid>
     );

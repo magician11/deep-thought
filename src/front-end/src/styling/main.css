@@ -28,18 +28,20 @@ body {
 
 /* The questions */
 
-.questions, .slick-slide {
-  height: 100vh;
+.questions {
+  margin-top: 11rem;
 }
 
-.questions .question {
+.question {
+  text-align: center;
   background: linear-gradient(#4682B4, #00BFFF);
   border-radius: 8px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 2.45rem;
+  padding: 3rem 1rem;
+}
+
+.question .container > * {
+  margin-bottom: 3rem;
 }
 
 /* Spinner loader */
