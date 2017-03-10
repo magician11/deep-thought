@@ -6,7 +6,7 @@
     "dev": "react-scripts start",
     "build": "react-scripts build"
   },
-  "homepage": "https://apps.golightlyplus.com/deep-thought/",
+  "homepage": "https://createdeepconnections.com/",
   "keywords": [
     "react"
   ],
@@ -16,10 +16,13 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "lodash.samplesize": "^4.2.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.3.2",
-    "react-swipe": "^5.0.6",
+    "react-ga": "^2.1.2",
+    "react-id-swiper": "^1.3.1",
+    "react-sound": "^0.5.2",
     "whatwg-fetch": "^2.0.1"
   }
 }

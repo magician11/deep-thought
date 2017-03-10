@@ -1,16 +1,38 @@
 body {
   font-family: 'Open Sans';
   background-color: #000;
-  color: white;
-  font-size: 2.2rem;
 }
 
-.home-screen, .loader-container, .error-message {
+html, body, #app, .app-container {
+  height: 100%;
+}
+
+/* override bootstrap from stretching the text off the card */
+@media (min-width: 768px) {
+  .container {
+    width: initial;
+  }
+}
+
+/* For the pager buttons */
+a, a:hover, a:focus {
+  color: DarkSlateBlue;
+}
+
+.pager li > a:hover, .pager li > a:focus {
+  background-color: #fff;
+}
+
+.center-center {
   display: flex;
-  height: 100vh;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  height: 100%;
+}
+
+.home-screen {
+  color: white;
+  font-size: 2.2rem;
 }
 
 .home-screen .logo {
@@ -18,7 +40,7 @@ body {
   width: 11rem;
 }
 
-.home-screen > div > * {
+.home-screen > * {
   margin-bottom: 3rem;
 }
 
@@ -27,9 +49,18 @@ body {
 }
 
 /* The questions */
+.question-screen {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
 
 .questions {
-  margin-top: 11rem;
+  height: 380px;
+  width: 400px;
+  margin: 0 auto;
+  padding: 56px;
 }
 
 .question {
@@ -37,13 +68,20 @@ body {
   background: linear-gradient(#4682B4, #00BFFF);
   border-radius: 8px;
   font-size: 2.45rem;
-  padding: 3rem 1rem;
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+  color: white;
 }
 
 .question .container > * {
   margin-bottom: 3rem;
 }
 
+/* The footer */
+.footer {
+  padding: 3rem 0;
+}
 /* Spinner loader */
 /* from http://tobiasahlin.com/spinkit/ */
 .spinner {

@@ -28,7 +28,7 @@ function getQuestions(auth, res, numQs) {
   sheets.spreadsheets.values.get({
     auth,
     spreadsheetId: '1lxo1qiy9aTm49kk_fyZ543IbxhSfYSgboXKBX1yz160',
-    range: 'A1:999',
+    range: 'A2:999',
   }, (err, response) => {
     if (err) {
       console.log(`The API returned an error: ${err}`);
