@@ -19,9 +19,9 @@ class DeepThoughtApp extends Component {
 
     this.state = {
       questions: [],
-      appReady: false,
-      started: false,
+      loadingData: false,
       error: '',
+      gameStarted: false,
     };
 
     // Add Google Analytics
@@ -33,24 +33,38 @@ class DeepThoughtApp extends Component {
 
   componentDidMount() {
     // grab all the questions direct from the spreadsheet feed
+
+  }
+
+  startGame(gameType) {
+
+    this.setState({loadingData: true});
+
     fetch('https://spreadsheets.google.com/feeds/cells/1lxo1qiy9aTm49kk_fyZ543IbxhSfYSgboXKBX1yz160/1/public/basic?alt=json')
     .then(response => response.json())
     .then((data) => {
       const allQuestions = [];
       data.feed.entry.forEach((cell) => {
         const cellPosition = cell.title.$t.match(/(\w)(\d+)/);
-        if(cellPosition[1] === 'A' && parseInt(cellPosition[2], 10) > 1) {
+        if(cellPosition[1] === gameType && parseInt(cellPosition[2], 10) > 1) {
           allQuestions.push(cell.content.$t);
         }
       });
-      this.setState({ questions: sampleSize(allQuestions, 8), appReady: true });
+
+      let questions;
+      switch (gameType) {
+        // 8 random questions
+        case 'A': questions = sampleSize(allQuestions, 8); break;
+        // the 36 questions to fall in love in order
+        case 'B': questions = allQuestions; break;
+        default: questions = [];
+      }
+
+      this.setState({ questions, gameStarted: true, loadingData: false });
+
     }).catch((ex) => {
       this.setState({error: ex.message});
     });
-  }
-
-  startGame() {
-    this.setState({ started: true });
   }
 
   render() {
@@ -65,22 +79,9 @@ class DeepThoughtApp extends Component {
           </Alert>
         </div>
       );
-    } else if (!this.state.appReady) {
+    } else if (this.state.loadingData) {
       content = <div className="center-center"><div className='spinner' /></div>;
-    } else if (!this.state.started) {
-      content = (
-        <div className="center-center">
-          <div className="home-screen text-center">
-            <YinYang className="logo" />
-            <h1>Deep Thought</h1>
-            <p>Questions To Deepen Connection</p>
-            <Button block bsStyle="primary" bsSize="large" onClick={this.startGame}>8 Deep Questions</Button>
-            <audio src="https://www.dropbox.com/s/r0z11xxh7xwjzfi/strange%20piano%20with%20beats.mp3?raw=1" autoPlay loop />
-          </div>
-        </div>
-      );
-    } else {
-
+    } else if (this.state.gameStarted) {
       const params = {
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
@@ -105,6 +106,19 @@ class DeepThoughtApp extends Component {
             </div>
           </Swiper>
           <Footer />
+        </div>
+      );
+    } else { // just show the main page
+      content = (
+        <div className="center-center">
+          <div className="home-screen text-center">
+            <YinYang className="logo" />
+            <h1>Deep Thought</h1>
+            <p>Questions To Deepen Connection</p>
+            <Button block bsStyle="primary" bsSize="large" onClick={() => this.startGame('A')}>8 Deep Questions</Button>
+            <Button block bsStyle="primary" bsSize="large" onClick={() => this.startGame('B')}>The 36 Questions That Lead to Love</Button>
+            <audio src="https://www.dropbox.com/s/r0z11xxh7xwjzfi/strange%20piano%20with%20beats.mp3?raw=1" autoPlay loop />
+          </div>
         </div>
       );
     }
