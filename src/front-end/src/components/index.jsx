@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import { Grid, Button, Alert } from 'react-bootstrap';
+import { Grid, Button, Alert, Glyphicon } from 'react-bootstrap';
 import Swiper from 'react-id-swiper'; // https://github.com/kidjp85/react-id-swiper
 import sampleSize from 'lodash.samplesize';
 import ReactGA from 'react-ga'; // https://github.com/react-ga/react-ga
 
+import About from './about';
 import Footer from './footer';
 
 import YinYang from '../svgs/yin-yang';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../styling/main.css';
-
-/* eslint-disable max-len, no-console */
 
 class DeepThoughtApp extends Component {
   constructor() {
@@ -22,6 +21,7 @@ class DeepThoughtApp extends Component {
       loadingData: false,
       error: '',
       gameStarted: false,
+      showModal: false,
     };
 
     // Add Google Analytics
@@ -115,7 +115,11 @@ class DeepThoughtApp extends Component {
             <p>Questions To Deepen Connection</p>
             <Button block bsStyle="primary" bsSize="large" onClick={() => this.startGame('A')}>8 Random Deep Questions</Button>
             <Button block bsStyle="primary" bsSize="large" onClick={() => this.startGame('B')}>The 36 Questions That Lead to Love</Button>
+            <Button onClick={() => this.setState({ showModal: true })} bsStyle="link" bsSize="large">
+              <Glyphicon glyph="info-sign" /> About
+            </Button>
             <audio src="https://www.dropbox.com/s/r0z11xxh7xwjzfi/strange%20piano%20with%20beats.mp3?raw=1" autoPlay loop />
+            <About showModal={this.state.showModal} onModalClosed={() => this.setState({showModal: false})}/>
           </div>
         </div>
       );
