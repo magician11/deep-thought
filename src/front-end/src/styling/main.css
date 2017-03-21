@@ -8,20 +8,11 @@ html, body, #app, .app-container {
 }
 
 /* override bootstrap from stretching the text off the card */
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   .container {
     width: initial;
   }
-}
-
-/* For the pager buttons */
-a, a:hover, a:focus {
-  color: DarkSlateBlue;
-}
-
-.pager li > a:hover, .pager li > a:focus {
-  background-color: #fff;
-}
+}*/
 
 .center-center {
   display: flex;
@@ -66,11 +57,15 @@ a, a:hover, a:focus {
   text-align: center;
   background: linear-gradient(#4682B4, #00BFFF);
   border-radius: 8px;
-  font-size: 2.45rem;
+  font-size: 2.38rem;
   padding: 3rem 0;
   display: flex;
   align-items: center;
   color: white;
+}
+
+.swiper-pagination-fraction {
+  color: wheat;
 }
 
 /* Spinner loader */

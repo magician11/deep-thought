@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Glyphicon, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Modal, Glyphicon, Button } from 'react-bootstrap';
 
 /* eslint-disable max-len */
 
@@ -12,7 +12,7 @@ class Footer extends Component {
   }
 
   render() {
-    const buttonTitle = 'About / Contact / FAQ';
+    const buttonTitle = 'About';
     return (
       <div>
         <Modal
@@ -43,14 +43,23 @@ class Footer extends Component {
             <Button onClick={() => this.setState({ showModal: false })}>Close</Button>
           </Modal.Footer>
         </Modal>
-        <div className="text-center footer">
-          <Button onClick={() => this.setState({ showModal: true })}>
-            <Glyphicon glyph="info-sign" /> { buttonTitle }
-          </Button>
-        </div>
+        <Grid className="footer">
+          <Row>
+            <Col xs={6}>
+              <Button onClick={() => window.location = '/'} bsStyle="link">
+                <Glyphicon glyph="home" /> Main Menu
+              </Button>
+            </Col>
+            <Col xs={6} className="text-right">
+              <Button onClick={() => this.setState({ showModal: true })} bsStyle="link">
+                <Glyphicon glyph="info-sign" /> { buttonTitle }
+              </Button>
+            </Col>
+          </Row>
+        </Grid>
       </div>
-      );
-    }
+    );
   }
+}
 
-  export default Footer;
+export default Footer;

@@ -31,11 +31,6 @@ class DeepThoughtApp extends Component {
     this.startGame = this.startGame.bind(this);
   }
 
-  componentDidMount() {
-    // grab all the questions direct from the spreadsheet feed
-
-  }
-
   startGame(gameType) {
 
     this.setState({loadingData: true});
@@ -86,24 +81,27 @@ class DeepThoughtApp extends Component {
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         pagination: '.swiper-pagination',
-        paginationType: 'progress',
+        paginationType: 'fraction',
         containerClass: 'questions',
         spaceBetween: 88,
         effect: 'flip',
         grabCursor: true
       };
 
+      const questions = this.state.questions.map((question, i) => {
+        return (
+          <div key={i} className='question'>
+            <Grid>
+              <div>{question}</div>
+            </Grid>
+          </div>
+        );
+      });
+
       content = (
         <div className="question-screen">
           <Swiper {...params}>
-            { this.state.questions.map((question, i) => <div key={i} className='question'><Grid>{question}</Grid></div>) }
-            <div key='final-slide' className='question'>
-              <Grid>
-                <h2><i className="fa fa-hand-peace-o" aria-hidden="true"></i></h2>
-                <h3>Thanks for playing!</h3>
-                <Button href="/">Start Over</Button>
-              </Grid>
-            </div>
+            { questions }
           </Swiper>
           <Footer />
         </div>
@@ -115,7 +113,7 @@ class DeepThoughtApp extends Component {
             <YinYang className="logo" />
             <h1>Deep Thought</h1>
             <p>Questions To Deepen Connection</p>
-            <Button block bsStyle="primary" bsSize="large" onClick={() => this.startGame('A')}>8 Deep Questions</Button>
+            <Button block bsStyle="primary" bsSize="large" onClick={() => this.startGame('A')}>8 Random Deep Questions</Button>
             <Button block bsStyle="primary" bsSize="large" onClick={() => this.startGame('B')}>The 36 Questions That Lead to Love</Button>
             <audio src="https://www.dropbox.com/s/r0z11xxh7xwjzfi/strange%20piano%20with%20beats.mp3?raw=1" autoPlay loop />
           </div>
