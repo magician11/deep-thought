@@ -30,9 +30,8 @@ class Footer extends Component {
             <h4>What if I don't want to answer a question?</h4>
             <p>This game is intended to facilitate depth and connection. If you feel unsafe for some reason in this group or with this question, then pass.</p>
             <p>Also remember the deepest connections are forged through being vulnerable. So take the risk sometimes in being really seen and heard.</p>
-            <h4>Have a strong opinion about a question? Want to suggest a new one?</h4>
-            <p>Great! All the current questions have been vetted by multiple people. The questions are intended to deepen connection, while avoiding diving into negativity. Of course everyone will have a subjective view of a question, and could be potentially triggered by any question. We do our best, and welcome any feedback.</p>
-            <p>To get in touch, see below.</p>
+            <h4>I want to suggest a new question.</h4>
+            <p>Great! <a href="https://goo.gl/forms/49quAbBREX7IzTuy2">Click here to fill out our form</a>.</p>
             <h4>Want to get in touch?</h4>
             <p>Email Andrew at <a href="mailto:support@andrewgolightly.com">support@andrewgolightly.com</a></p>
             <br />

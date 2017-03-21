@@ -4,7 +4,6 @@ import { Grid, Button, Alert } from 'react-bootstrap';
 import Swiper from 'react-id-swiper'; // https://github.com/kidjp85/react-id-swiper
 import sampleSize from 'lodash.samplesize';
 import ReactGA from 'react-ga'; // https://github.com/react-ga/react-ga
-import Sound from 'react-sound';
 
 import Footer from './footer';
 
@@ -76,10 +75,7 @@ class DeepThoughtApp extends Component {
             <h1>Deep Thought</h1>
             <p>Questions To Deepen Connection</p>
             <Button block bsStyle="primary" bsSize="large" onClick={this.startGame}>8 Deep Questions</Button>
-            <Sound
-              url='https://www.dropbox.com/s/3186zxvhg4nex7k/J%20Dilla%20-%20Life%20%28Instrumental%29.mp3?raw=1'
-              playStatus={Sound.status.PLAYING}
-            />
+            <audio src="https://www.dropbox.com/s/r0z11xxh7xwjzfi/strange%20piano%20with%20beats.mp3?raw=1" autoPlay loop />
           </div>
         </div>
       );
