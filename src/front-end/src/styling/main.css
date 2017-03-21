@@ -51,14 +51,13 @@ a, a:hover, a:focus {
 /* The questions */
 .question-screen {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   height: 100%;
 }
 
 .questions {
   height: 560px;
-  width: 400px;
+  width: 96%;
   margin: 0 auto;
   padding: 56px;
 }
@@ -74,14 +73,6 @@ a, a:hover, a:focus {
   color: white;
 }
 
-.question .container > * {
-  margin-bottom: 3rem;
-}
-
-/* The footer */
-.footer {
-  padding: 3rem 0;
-}
 /* Spinner loader */
 /* from http://tobiasahlin.com/spinkit/ */
 .spinner {
