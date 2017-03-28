@@ -5,11 +5,11 @@ import Swiper from 'react-id-swiper'; // https://github.com/kidjp85/react-id-swi
 import sampleSize from 'lodash.samplesize';
 import ReactGA from 'react-ga'; // https://github.com/react-ga/react-ga
 
-// import About from './about';
+import 'bootstrap/dist/css/bootstrap.css';
+
 import Home from './home';
 import Footer from './footer';
 
-import 'bootstrap/dist/css/bootstrap.css';
 import '../styling/main.css';
 
 class DeepThoughtApp extends Component {
@@ -32,8 +32,7 @@ class DeepThoughtApp extends Component {
   }
 
   startGame(gameType) {
-
-    this.setState({loadingData: true});
+    this.setState({ loadingData: true });
 
     fetch('https://spreadsheets.google.com/feeds/cells/1lxo1qiy9aTm49kk_fyZ543IbxhSfYSgboXKBX1yz160/1/public/basic?alt=json')
     .then(response => response.json())
@@ -41,7 +40,7 @@ class DeepThoughtApp extends Component {
       const allQuestions = [];
       data.feed.entry.forEach((cell) => {
         const cellPosition = cell.title.$t.match(/(\w)(\d+)/);
-        if(cellPosition[1] === gameType && parseInt(cellPosition[2], 10) > 1) {
+        if (cellPosition[1] === gameType && parseInt(cellPosition[2], 10) > 1) {
           allQuestions.push(cell.content.$t);
         }
       });
@@ -56,9 +55,8 @@ class DeepThoughtApp extends Component {
       }
 
       this.setState({ questions, gameStarted: true, loadingData: false });
-
     }).catch((ex) => {
-      this.setState({error: ex.message});
+      this.setState({ error: ex.message });
     });
   }
 
@@ -69,13 +67,13 @@ class DeepThoughtApp extends Component {
       content = (
         <div className="error-message">
           <Alert bsStyle="danger">
-            <p><i className="fa fa-exclamation-circle" aria-hidden="true"></i> Error: {this.state.error}</p>
+            <p><i className="fa fa-exclamation-circle" aria-hidden="true" /> Error: {this.state.error}</p>
             <p>Please <a href="https://www.golightlyplus.com">contact Andrew</a></p>
           </Alert>
         </div>
       );
     } else if (this.state.loadingData) {
-      content = <div className="center-center"><div className='spinner' /></div>;
+      content = <div className="center-center"><div className="spinner" /></div>;
     } else if (this.state.gameStarted) {
       const params = {
         nextButton: '.swiper-button-next',
@@ -85,12 +83,12 @@ class DeepThoughtApp extends Component {
         containerClass: 'questions',
         spaceBetween: 88,
         effect: 'flip',
-        grabCursor: true
+        grabCursor: true,
       };
 
-      const questions = this.state.questions.map((question, i) => {
+      const questions = this.state.questions.map((question) => {
         return (
-          <div key={i} className='question'>
+          <div key={question.substring(0, 33)} className="question">
             <Grid>
               <div>{question}</div>
             </Grid>
@@ -107,7 +105,7 @@ class DeepThoughtApp extends Component {
         </div>
       );
     } else { // just show the main page
-      content = <Home gameChosen={(gameType) => this.startGame(gameType)} />;
+      content = <Home gameChosen={gameType => this.startGame(gameType)} />;
     }
 
     return (

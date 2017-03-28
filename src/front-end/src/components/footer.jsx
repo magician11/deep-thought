@@ -15,8 +15,8 @@ class Footer extends Component {
       <Grid className="footer">
         <Row>
           <Col xs={6}>
-            <Button onClick={() => window.location = '/'} bsStyle="link">
-              <Glyphicon glyph="home" /> Main Menu
+            <Button onClick={() => { window.location = '/'; }} bsStyle="link">
+              <Glyphicon glyph="home" /> Home
             </Button>
           </Col>
           <Col xs={6} className="text-right">
@@ -25,7 +25,7 @@ class Footer extends Component {
             </Button>
           </Col>
         </Row>
-        <DeepThoughtModal showModal={this.state.showModal} onModalClosed={() => this.setState({showModal: false})}/>
+        <DeepThoughtModal showModal={this.state.showModal} onModalClosed={() => this.setState({ showModal: false })} />
       </Grid>
   );
 }
