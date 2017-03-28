@@ -12,6 +12,11 @@
   ],
   "author": "Andrew Golightly <support@andrewgolightly.com> (http://www.golightlyplus.com)",
   "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "react-scripts": "^0.8.5"
   },
   "dependencies": {

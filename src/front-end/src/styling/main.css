@@ -7,13 +7,6 @@ html, body, #app, .app-container {
   height: 100%;
 }
 
-/* override bootstrap from stretching the text off the card */
-/*@media (min-width: 768px) {
-  .container {
-    width: initial;
-  }
-}*/
-
 .center-center {
   display: flex;
   align-items: center;
