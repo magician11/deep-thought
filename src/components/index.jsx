@@ -65,7 +65,7 @@ class DeepThoughtApp extends Component {
 
     if (this.state.error !== '') {
       content = (
-        <div className="error-message">
+        <div className="center-center">
           <Alert bsStyle="danger">
             <p><i className="fa fa-exclamation-circle" aria-hidden="true" /> Error: {this.state.error}</p>
             <p>Please <a href="https://www.golightlyplus.com">contact Andrew</a></p>
@@ -101,7 +101,7 @@ class DeepThoughtApp extends Component {
           <Swiper {...params}>
             { questions }
           </Swiper>
-          <Footer />
+          <Footer goHome={() => this.setState({ gameStarted: false })} />
         </div>
       );
     } else { // just show the main page

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Button, Glyphicon } from 'react-bootstrap';
 
 import DeepThoughtModal from './modal';
+import Author from './author';
 
 class Home extends Component {
   constructor(props) {
@@ -31,12 +32,16 @@ class Home extends Component {
           <Button onClick={() => this.setState({ showModal: true })} bsStyle="link" bsSize="large">
             <Glyphicon glyph="info-sign" /> About
           </Button>
+          <Author />
         </div>
         <audio src="https://www.dropbox.com/s/r0z11xxh7xwjzfi/strange%20piano%20with%20beats.mp3?raw=1" autoPlay loop />
-        <DeepThoughtModal showModal={this.state.showModal} onModalClosed={() => this.setState({ showModal: false })} />
+        <DeepThoughtModal
+          showModal={this.state.showModal}
+          onModalClosed={() => this.setState({ showModal: false })}
+        />
       </Grid>
-  );
-}
+    );
+  }
 }
 
 Home.propTypes = {

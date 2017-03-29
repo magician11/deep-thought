@@ -1,6 +1,7 @@
 body {
   font-family: 'Open Sans';
   background-color: #000;
+  color: #fff;
 }
 
 html, body, #app, .app-container {
@@ -15,13 +16,7 @@ html, body, #app, .app-container {
 }
 
 .home-screen {
-  color: white;
   font-size: 2.2rem;
-}
-
-.home-screen .logo {
-  fill: #fff;
-  width: 11rem;
 }
 
 .home-screen > * {
@@ -30,13 +25,6 @@ html, body, #app, .app-container {
 
 ::selection {
   background: #4682B4;
-}
-
-/* The questions */
-.question-screen {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .questions {
@@ -57,8 +45,12 @@ html, body, #app, .app-container {
   color: white;
 }
 
-.swiper-pagination-fraction {
-  color: wheat;
+.modal-body {
+  color: #333;
+}
+
+.author {
+  font-size: 1.8rem;
 }
 
 /* Spinner loader */
