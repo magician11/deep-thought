@@ -10,11 +10,10 @@ const DeepThoughtModal = props =>
     onHide={() => props.onModalClosed()}
   >
     <Modal.Header closeButton>
-      <Modal.Title id="about-modal">About</Modal.Title>
+      <Modal.Title id="about-modal">About Deep Thought</Modal.Title>
     </Modal.Header>
     <Modal.Body>
-      <h4>About Deep Thought</h4>
-      <p>This is an app that poses a variety of deep questions designed to deepen the connection with those you are playing this game with.</p>
+      <blockquote>This is an app that poses a variety of deep questions designed to deepen the connection with those you are playing this game with.</blockquote>
       <h4>How do I use this?</h4>
       <p>There are no rules per se. Suggested use is in a group or 1-on-1 to take turns answering a question, and then move onto the next one. Allow the person speaking to talk without being interrupted. Be honest.</p>
       <h4>What if I do not want to answer a question?</h4>
